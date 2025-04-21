@@ -18,6 +18,7 @@ Este proyecto conecta Python con una instancia local de MongoDB para el trabajo 
 
 - `conectar_mongo.py`: Conecta a MongoDB y lista las bases de datos disponibles.
 - `crear_restaurante.py`: Crea una base de datos "restaurante" y una colección "platos" con un ejemplo de inserción.
+- `insertar_datos.py`:  Inserta datos desde python. Sirve como ejemplo, el resto de colecciones se agregaran desde mongo
 
 ## Cómo ejecutar
 
