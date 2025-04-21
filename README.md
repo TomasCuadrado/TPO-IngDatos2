@@ -9,6 +9,7 @@ platos
 pedidos
 mesas
 categorías (de platos, por ejemplo: entrada, principal, postre)
+Adicionalmente hay una captura evidenciando datos hasta el momento
 
 # Conexión de Python con MongoDB - TP Restaurante 🍽️
 
@@ -25,6 +26,8 @@ Este proyecto conecta Python con una instancia local de MongoDB para el trabajo 
 
 1. Asegurate de tener MongoDB corriendo localmente.
 2. Instalá pymongo
+
+
 
 
 
