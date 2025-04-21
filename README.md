@@ -23,6 +23,9 @@ Este proyecto conecta Python con una instancia local de MongoDB para el trabajo 
 ## Cómo ejecutar
 
 1. Asegurate de tener MongoDB corriendo localmente.
-2. Instalá pymongo:
+2. Instalá pymongo
 
-## 
+## Agregar colecciones en mongo
+
+Gran parte de colecciones fueron agregadas manualmente con insertOne o insertMany
+Queda evidenciado en las capturas
