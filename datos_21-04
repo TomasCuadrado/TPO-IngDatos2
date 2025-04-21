@@ -1,0 +1,22 @@
+clientes:
+{'_id': ObjectId('6806b650858f6290397e9434'), 'nombre': 'Juan P�rez', 'telefono': '123456789', 'correo': 'juan@example.com'}
+{'_id': ObjectId('6806b650858f6290397e9436'), 'nombre': 'Raul Gonzalez', 'telefono': '123456789', 'correo': 'raul@example.com'}
+{'_id': ObjectId('6806b650858f6290397e9437'), 'nombre': 'German Martinez', 'telefono': '123456789', 'correo': 'german@example.com'}
+
+empleados:
+{'_id': ObjectId('6806b9a34c796c9c37141212'), 'nombre': 'Laura Gomez', 'rol': 'moza', 'dni': '12345678'}
+
+mesas:
+{'_id': ObjectId('6806ba16adc8783a8ec6f7cb'), 'numero': 5, 'capacidad': 4}
+
+platos:
+{'_id': ObjectId('6806bb8293711f6307e4874a'), 'nombre': 'Pizza Margarita', 'precio': 12500, 'disponible': True}
+{'_id': ObjectId('6806bb8293711f6307e4874b'), 'nombre': 'Pizza Cuatro Quesos', 'precio': 14500, 'disponible': True}
+{'_id': ObjectId('6806bb8293711f6307e4874c'), 'nombre': 'Milanesa con papas', 'precio': 9500, 'disponible': True}
+{'_id': ObjectId('6806bb8293711f6307e4874d'), 'nombre': 'Ensalada Caesar', 'precio': 8500, 'disponible': False}
+
+pedidos:
+{'_id': ObjectId('6806bf49ec24931240463acb'), 'cliente': 'Juan Perez', 'mesa': 5, 'plato': 'Milanesa con papas', 'fecha': '2025-04-21', 'estado_pago': 'pendiente'}
+
+categorias:
+{'_id': ObjectId('6806bc02fb10c3eede5f2af6'), 'nombre': 'Bebidas'}
