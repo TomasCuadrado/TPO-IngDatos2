@@ -1,2 +1,5 @@
 El que siga debería bajar la libreria pymongo y armar la base de datos siguiendo los archivos de python que subí. O sea copiando, pegando y ejecutando.
 Despues ver la captura que subi de como está la base de datos y subirlo a su maquina con insertOne desde mongoshell.
+
+21-04 19:00 (Aquino Jeronimo): Seguí con lo que estaba haciendo nacho, y subi todo el codigo para que puedan ir haciendolo en sus maquinas paso a paso. 
+Luego de haber realizado los pasos de nacho, deberán copiar y pegar todos y cada uno de los inserts que dejé acá. Para poder llegar al punto que lo deje yo el día 21-04.
