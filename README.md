@@ -2,6 +2,14 @@
 TPO de la materia Ingeniería de datos II, 1er cuatrimestre 2025.
 Grupo 3
 
+La idea es armar una base de datos con las siguientes colecciones:
+clientes
+empleados
+platos
+pedidos
+mesas
+categorías (de platos, por ejemplo: entrada, principal, postre)
+
 # Conexión de Python con MongoDB - TP Restaurante 🍽️
 
 Este proyecto conecta Python con una instancia local de MongoDB para el trabajo práctico de la materia.
@@ -16,3 +24,4 @@ Este proyecto conecta Python con una instancia local de MongoDB para el trabajo 
 1. Asegurate de tener MongoDB corriendo localmente.
 2. Instalá pymongo:
 
+## 
