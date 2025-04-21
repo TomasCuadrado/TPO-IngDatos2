@@ -19,13 +19,12 @@ Este proyecto conecta Python con una instancia local de MongoDB para el trabajo 
 - `conectar_mongo.py`: Conecta a MongoDB y lista las bases de datos disponibles.
 - `crear_restaurante.py`: Crea una base de datos "restaurante" y una colección "platos" con un ejemplo de inserción.
 - `insertar_datos.py`:  Inserta datos desde python. Sirve como ejemplo, el resto de colecciones se agregaran desde mongo
+- `consultar_datos.py`: consulta los datos insertados en la base de datos. La mayoria se insertaron manualmente (a través de mongosh) como estaba indicado
 
 ## Cómo ejecutar
 
 1. Asegurate de tener MongoDB corriendo localmente.
 2. Instalá pymongo
 
-## Agregar colecciones en mongo
 
-Gran parte de colecciones fueron agregadas manualmente con insertOne o insertMany
-Queda evidenciado en las capturas
+
