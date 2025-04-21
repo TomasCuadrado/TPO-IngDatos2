@@ -1,9 +1,13 @@
 from pymongo import MongoClient
 
+# Conectarse a la base de datos
 cliente = MongoClient("mongodb://localhost:27017/")
 db = cliente["restaurante"]
+coleccion = db["clientes"]  # Cambiá por la colección que quieras consultar
 
-for nombre in db.list_collection_names():
-    print(f"\nColección: {nombre}")
-    for doc in db[nombre].find():
-        print(doc)
+# Obtener todos los documentos (para obtener todos los datos utilizamos solamente ".find()" )
+documentos = coleccion.find()
+
+# Mostrar los documentos
+for doc in documentos:
+    print(doc)
