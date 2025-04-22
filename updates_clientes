@@ -1,0 +1,21 @@
+#Para tener mas variedad de filtros actualizamos el cliente y colocamos un apartado de reservas, el cual sera un Objeto, 
+#ya que me parecia innecesario hacer una nueva coleccion solo para reservas. 
+from pymongo import MongoClient
+cliente = MongoClient("mongodb://localhost:27017/")
+db = cliente["restaurante"]
+coleccion = db["clientes"]
+
+#Actualizar clientes para agregar el campo "reserva"
+coleccion.update_many({}, 
+                      {
+                          "$set": 
+                              {"reserva": {
+                                "fecha": None,
+                                "hora": None,
+                                "mesa": None,
+                                "activa": False
+                                  }
+                               }
+                            }
+                      )
+print("Clientes actualizados correctamente.")
