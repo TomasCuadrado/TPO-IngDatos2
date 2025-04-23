@@ -1,0 +1,107 @@
+# 7 Propuestas de actualizaciones
+
+from pymongo import MongoClient
+from datetime import datetime, timedelta    
+cliente = MongoClient("mongodb://localhost:27017/")
+db = cliente["restaurante"]
+
+#Funciones
+
+# 1. Actualizar el estado de pago de un pedido a "pagado"
+def actualizar_estado_pago(id_pedido):
+    coleccion = db["pedidos"]
+    coleccion.update_one({"_id": id_pedido}, {"$set": {"estado_pago": "pagado"}})
+
+# 2. Cambiar el rol de un empleado
+def cambiar_rol_empleado(nombre_empleado, nuevo_rol):
+    coleccion = db["empleados"]
+    coleccion.update_one({"nombre": nombre_empleado}, {"$set": {"rol": nuevo_rol}})
+
+# 3. Actualizar el precio de todos los platos de una categoría específica
+def actualizar_precio_categoria(categoria, nuevo_precio):
+    coleccion = db["platos"]
+    coleccion.update_many({"categoria": categoria}, {"$set": {"precio": nuevo_precio}})
+
+# 4. Actualizar la disponibilidad de mesas según una lista de mesas ocupadas
+def actualizar_mesas_ocupadas(mesas_ocupadas):
+    coleccion = db["mesas"]
+    coleccion.update_many({}, {"$set": {"disponible": True}})  # resetear todas a disponibles
+    coleccion.update_many({"numero": {"$in": mesas_ocupadas}}, {"$set": {"disponible": False}})
+
+# 5. Agregar campo “disponible” a platos que aún no lo tienen
+def agregar_disponibilidad_a_platos():
+    coleccion = db["platos"]
+    coleccion.update_many({"disponible": {"$exists": False}}, {"$set": {"disponible": True}})
+
+# 6. Desactivar todas las reservas vencidas (por ejemplo, con fecha anterior a hoy)
+def desactivar_reservas_vencidas():
+    coleccion = db["clientes"]
+    hoy = datetime.now().strftime("%Y-%m-%d")
+    coleccion.update_many(
+        {"reserva.fecha": {"$lt": hoy}},
+        {"$set": {"reserva.activa": False}}
+    )
+
+# 7. Actualizar el número de mesa asignada a un pedido específico
+def actualizar_mesa_pedido(id_pedido, nueva_mesa):
+    coleccion = db["pedidos"]
+    coleccion.update_one({"_id": id_pedido}, {"$set": {"mesa": nueva_mesa}})
+
+
+#Programa principal
+def menu_actualizaciones():
+    while True:
+        print("\n--- Menú de Actualizaciones ---")
+        print("1. Actualizar estado de pago a 'pagado'")
+        print("2. Cambiar rol de un empleado")
+        print("3. Actualizar precio de platos por categoría")
+        print("4. Actualizar disponibilidad de mesas")
+        print("5. Agregar campo 'disponible' a platos")
+        print("6. Desactivar reservas vencidas")
+        print("7. Actualizar número de mesa en un pedido")
+        print("0. Salir")
+
+        opcion = input("Selecciona una opción: ")
+
+        if opcion == "1":
+            id_pedido = input("ID del pedido (ObjectId): ")
+            from bson import ObjectId
+            actualizar_estado_pago(ObjectId(id_pedido))
+
+        elif opcion == "2":
+            nombre = input("Nombre del empleado: ")
+            nuevo_rol = input("Nuevo rol: ")
+            cambiar_rol_empleado(nombre, nuevo_rol)
+
+        elif opcion == "3":
+            categoria = input("Categoría de platos: ")
+            precio = float(input("Nuevo precio: "))
+            actualizar_precio_categoria(categoria, precio)
+
+        elif opcion == "4":
+            mesas = input("Lista de mesas ocupadas (separadas por coma): ")
+            mesas_lista = [int(x.strip()) for x in mesas.split(",")]
+            actualizar_mesas_ocupadas(mesas_lista)
+
+        elif opcion == "5":
+            agregar_disponibilidad_a_platos()
+            print("Campo 'disponible' agregado a platos que no lo tenían.")
+
+        elif opcion == "6":
+            desactivar_reservas_vencidas()
+            print("Reservas vencidas desactivadas.")
+
+        elif opcion == "7":
+            id_pedido = input("ID del pedido (ObjectId): ")
+            nueva_mesa = int(input("Nuevo número de mesa: "))
+            from bson import ObjectId
+            actualizar_mesa_pedido(ObjectId(id_pedido), nueva_mesa)
+
+        elif opcion == "0":
+            break
+
+        else:
+            print("Opción no válida.")
+
+if __name__ == "__main__":
+    menu_actualizaciones()
