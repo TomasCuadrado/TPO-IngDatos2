@@ -1,0 +1,97 @@
+# 7 propuestas de eliminacion
+
+from pymongo import MongoClient
+from bson import ObjectId
+from datetime import datetime
+
+cliente = MongoClient("mongodb://localhost:27017/")
+db = cliente["restaurante"]
+
+
+#Funciones
+# 1. Eliminar cliente por nombre
+def eliminar_cliente_por_nombre(nombre):
+    coleccion = db["clientes"]
+    resultado = coleccion.delete_one({"nombre": nombre})
+    print(f"{resultado.deleted_count} cliente eliminado.")
+
+# 2. Eliminar plato por nombre
+def eliminar_plato_por_nombre(nombre):
+    coleccion = db["platos"]
+    resultado = coleccion.delete_one({"nombre": nombre})
+    print(f"{resultado.deleted_count} plato eliminado.")
+
+# 3. Eliminar empleados con rol "inactivo"
+def eliminar_empleados_inactivos():
+    coleccion = db["empleados"]
+    resultado = coleccion.delete_many({"rol": "inactivo"})
+    print(f"{resultado.deleted_count} empleados inactivos eliminados.")
+
+# 4. Eliminar pedidos con estado de pago cancelado
+def eliminar_pedidos_cancelados():
+    coleccion = db["pedidos"]
+    resultado = coleccion.delete_many({"estado_pago": "cancelado"})
+    print(f"{resultado.deleted_count} pedidos eliminados.")
+
+# 5. Eliminar mesas que no están disponibles
+def eliminar_mesas():
+    coleccion = db["mesas"]
+    resultado = coleccion.delete_many({"disponible": False})
+    print(f"{resultado.deleted_count} mesas eliminadas.")
+
+# 6. Eliminar platos por categoría
+def eliminar_platos_por_categoria(categoria):
+    coleccion = db["platos"]
+    resultado = coleccion.delete_many({"categoria": categoria})
+    print(f"{resultado.deleted_count} platos de la categoría '{categoria}' eliminados.")
+
+# 7. Eliminar reservas vencidas (fecha anterior a hoy)
+def eliminar_reservas_vencidas():
+    coleccion = db["clientes"]
+    hoy = datetime.now().strftime("%Y-%m-%d")
+    resultado = coleccion.update_many(
+        {"reserva.fecha": {"$lt": hoy}},
+        {"$unset": {"reserva": ""}}
+    )
+    print(f"{resultado.modified_count} reservas vencidas eliminadas.")
+
+#Programa principal
+def menu_eliminaciones():
+    while True:
+        print("\n--- MENÚ DE ELIMINACIONES ---")
+        print("1. Eliminar cliente por nombre")
+        print("2. Eliminar plato por nombre")
+        print("3. Eliminar empleados con rol 'inactivo'")
+        print("4. Eliminar pedidos con estado 'cancelado'")
+        print("5. Eliminar mesas que no están disponibles")
+        print("6. Eliminar platos por categoría")
+        print("7. Eliminar reservas vencidas")
+        print("0. Salir")
+
+        opcion = input("Seleccioná una opción: ")
+
+        if opcion == "1":
+            nombre = input("Nombre del cliente: ")
+            eliminar_cliente_por_nombre(nombre)
+        elif opcion == "2":
+            nombre = input("Nombre del plato: ")
+            eliminar_plato_por_nombre(nombre)
+        elif opcion == "3":
+            eliminar_empleados_inactivos()
+        elif opcion == "4":
+            eliminar_pedidos_cancelados()
+        elif opcion == "5":
+            eliminar_mesas()
+        elif opcion == "6":
+            categoria = input("Nombre de la categoría: ")
+            eliminar_platos_por_categoria(categoria)
+        elif opcion == "7":
+            eliminar_reservas_vencidas()
+        elif opcion == "0":
+            print("Saliendo del menú.")
+            break
+        else:
+            print("Opción inválida. Intentá nuevamente.")
+
+if __name__ == "__main__":
+    menu_eliminaciones()
