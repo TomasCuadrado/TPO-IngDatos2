@@ -30,4 +30,3 @@ Este proyecto conecta Python con una instancia local de MongoDB para el trabajo 
 
 
 
-
